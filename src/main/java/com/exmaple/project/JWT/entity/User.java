@@ -1,6 +1,8 @@
 package com.exmaple.project.JWT.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Set;
 
@@ -8,9 +10,11 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 
 
 @Entity
+@Setter
+@Getter
 public class User {
     @Id
-    @GeneratedValue(strategy=IDENTITY)
+    @GeneratedValue(strategy = IDENTITY)
     int id;
     String email;
     String password;
@@ -25,38 +29,5 @@ public class User {
             }
     )
     private Set<Role> role;
-
-    public Set<Role> getRole() {
-        return role;
-    }
-
-    public void setRole(Set<Role> role) {
-        this.role = role;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
 
 }
