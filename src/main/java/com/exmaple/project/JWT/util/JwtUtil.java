@@ -15,7 +15,7 @@ import java.util.function.Function;
 
 @Component
 public class JwtUtil {
-    private static final int TOKEN_VALIDITY = 3600 * 5;
+
     SecretKey SECRET_KEY = Keys.hmacShaKeyFor(Decoders.BASE64.decode("JWTlearningisjhfihshidfbdsjajfbsdkjbasjdbgiuadgsnjnadsf"));
 
     public String getUserNameFromToken(String token) {
@@ -40,17 +40,19 @@ public class JwtUtil {
 
     public boolean validateToken(String jwtToken, UserDetails userDetails) {
         String userName = getUserNameFromToken(jwtToken);
-        return (userName.equals(userDetails.getUsername()) );
+        return (userName.equals(userDetails.getUsername()) && isTokenExpired(jwtToken));
     }
 
-    private boolean isTokenExpired(String token) {
-        final Date expirationDate = getExpirationDateFromToken(token);
-        return expirationDate.before(new Date());
+    private Boolean isTokenExpired(String token) {
+        final Date expiration = getExpirationDateFromToken(token);
+        return expiration.after(new Date());
     }
 
-    private Date getExpirationDateFromToken(String token) {
+    public Date getExpirationDateFromToken(String token) {
         return getClaimFromToken(token, Claims::getExpiration);
     }
+
+
 
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
@@ -58,7 +60,7 @@ public class JwtUtil {
                 .claims(claims)
                 .subject(userDetails.getUsername())
                 .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + TOKEN_VALIDITY * 1000))
+                .expiration(new Date(System.currentTimeMillis()+60480000))
                 .signWith(SECRET_KEY)
                 .compact();
     }
