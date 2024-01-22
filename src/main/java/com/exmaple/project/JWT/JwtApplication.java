@@ -1,5 +1,7 @@
 package com.exmaple.project.JWT;
 
+import com.exmaple.project.JWT.configuration.JwtService;
+import com.exmaple.project.JWT.entity.JwtRequest;
 import com.exmaple.project.JWT.entity.User;
 import com.exmaple.project.JWT.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootApplication
 public class JwtApplication implements CommandLineRunner{
+    @Autowired
+    UserRepository userRepository;
+    @Autowired
+    JwtService jwtService;
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public static void main(String[] args) {
         SpringApplication.run(JwtApplication.class, args);
@@ -18,6 +26,11 @@ public class JwtApplication implements CommandLineRunner{
 
     @Override
     public void run(String... args) throws Exception {
+//    User user=new User();
+//    user.setEmail("aaa");
+//    user.setPassword(bCryptPasswordEncoder.encode("aaa"));
+//    userRepository.save(user);
+
 
     }
 }

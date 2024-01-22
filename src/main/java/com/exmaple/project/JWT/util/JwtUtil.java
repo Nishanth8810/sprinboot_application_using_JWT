@@ -2,9 +2,10 @@ package com.exmaple.project.JWT.util;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import io.jsonwebtoken.security.SecureDigestAlgorithm;
+import io.jsonwebtoken.security.SignatureAlgorithm;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
@@ -30,8 +31,8 @@ public class JwtUtil {
 
 
     private Claims getAllClaimsFromToken(String token) {
-        return Jwts.parserBuilder().setSigningKey(SECRET_KEY)
-                .build().parseClaimsJwt(token).getBody();
+        return Jwts.parser().verifyWith(SECRET_KEY)
+                .build().parseUnsecuredClaims(token).getPayload();
     }
 
     public boolean validateToken(String jwtToken, UserDetails userDetails) {
@@ -51,11 +52,11 @@ public class JwtUtil {
     public String generateToken(UserDetails userDetails){
         Map<String,Object> claims=new HashMap<>();
         return Jwts.builder()
-                .setClaims(claims)
-                .setSubject(userDetails.getUsername())
-                .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() +TOKEN_VALIDITY *1000 ))
-                .signWith(SECRET_KEY,SignatureAlgorithm.HS384)
+                .claims(claims)
+                .subject(userDetails.getUsername())
+                .issuedAt(new Date(System.currentTimeMillis()))
+                .expiration(new Date(System.currentTimeMillis() +TOKEN_VALIDITY *1000 ))
+                .signWith(SECRET_KEY)
                 .compact();
     }
 
