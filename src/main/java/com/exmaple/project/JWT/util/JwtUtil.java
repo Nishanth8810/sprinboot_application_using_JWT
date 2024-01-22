@@ -29,13 +29,18 @@ public class JwtUtil {
 
 
     private Claims getAllClaimsFromToken(String token) {
-        return Jwts.parser().verifyWith(SECRET_KEY)
-                .build().parseUnsecuredClaims(token).getPayload();
+        return Jwts.
+                parser()
+                .verifyWith(SECRET_KEY)
+                .build()
+                .parseSignedClaims(token)
+                .getPayload();
+
     }
 
     public boolean validateToken(String jwtToken, UserDetails userDetails) {
         String userName = getUserNameFromToken(jwtToken);
-        return (userName.equals(userDetails.getUsername()) && isTokenExpired(jwtToken));
+        return (userName.equals(userDetails.getUsername()) );
     }
 
     private boolean isTokenExpired(String token) {
