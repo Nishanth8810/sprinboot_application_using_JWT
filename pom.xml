@@ -42,8 +42,6 @@
 			<version>0.12.3</version>
 			<scope>runtime</scope>
 		</dependency>
-
-
 		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -57,7 +55,6 @@
 			<artifactId>jjwt-jackson</artifactId>
 			<version>0.12.3</version> <!-- Replace with the appropriate version -->
 		</dependency>
-
 
 		<dependency>
 			<groupId>com.mysql</groupId>

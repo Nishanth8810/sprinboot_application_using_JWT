@@ -11,22 +11,16 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     @Autowired
     JwtService jwtService;
+
     @PostMapping("/authenticate")
     public JwtResponse createJwtTokens(@RequestBody JwtRequest jwtRequest)
             throws Exception {
-        System.out.println("aojhasidg");
-        System.out.println("password "+jwtRequest.getUserName());
-        System.out.println("useername "+jwtRequest.getUserPassword());
         return jwtService.createJwtToken(jwtRequest);
     }
 
-//    @PostMapping("/auth")
-//    public String kasf(@RequestBody JwtRequest jwtRequest){
-//        return "hi";
-//    }
 
     @GetMapping("/home")
-    public String test(){
+    public String test() {
         return "welcome";
     }
 
