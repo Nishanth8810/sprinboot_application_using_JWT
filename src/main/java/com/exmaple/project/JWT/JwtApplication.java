@@ -25,8 +25,8 @@ public class JwtApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 //    User user=new User();
-//    user.setEmail("aaa");
-//    user.setPassword(bCryptPasswordEncoder.encode("aaa"));
+//    user.setEmail("bbb");
+//    user.setPassword(bCryptPasswordEncoder.encode("bbb"));
 //    userRepository.save(user);
 
 

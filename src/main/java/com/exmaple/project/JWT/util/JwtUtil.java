@@ -40,18 +40,17 @@ public class JwtUtil {
 
     public boolean validateToken(String jwtToken, UserDetails userDetails) {
         String userName = getUserNameFromToken(jwtToken);
-        return (userName.equals(userDetails.getUsername()) && isTokenExpired(jwtToken));
+        return (userName.equals(userDetails.getUsername()) && !isTokenExpired(jwtToken));
     }
 
     private Boolean isTokenExpired(String token) {
         final Date expiration = getExpirationDateFromToken(token);
-        return expiration.after(new Date());
+        return expiration.before(new Date());
     }
 
     public Date getExpirationDateFromToken(String token) {
         return getClaimFromToken(token, Claims::getExpiration);
     }
-
 
 
     public String generateToken(UserDetails userDetails) {
@@ -60,7 +59,7 @@ public class JwtUtil {
                 .claims(claims)
                 .subject(userDetails.getUsername())
                 .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis()+60480000))
+                .expiration(new Date(System.currentTimeMillis() + 60480000))
                 .signWith(SECRET_KEY)
                 .compact();
     }

@@ -23,8 +23,6 @@ import java.util.Set;
 public class JwtService implements UserDetailsService {
     @Autowired
     AuthenticationManager authenticationManager;
-
-
     @Autowired
     UserRepository userRepository;
     @Autowired
@@ -35,8 +33,8 @@ public class JwtService implements UserDetailsService {
         String userName = jwtRequest.getUserName();
         String userPassword = jwtRequest.getUserPassword();
 
-        int res=authenticate(userName, userPassword);
-        if (res==2){
+        int res = authenticate(userName, userPassword);
+        if (res == 2) {
             return null;
         }
 
@@ -71,7 +69,6 @@ public class JwtService implements UserDetailsService {
         } catch (DisabledException e) {
             throw new Exception("user is disabled");
         } catch (BadCredentialsException e) {
-//            throw new Exception("Bad credentials");
             return 2;
         }
     }

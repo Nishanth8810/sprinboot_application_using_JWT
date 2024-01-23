@@ -46,9 +46,7 @@ public class JwtFilter extends OncePerRequestFilter {
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
-        } else {
 
-            System.out.println("Token doesn't start with bearer");
         }
 
         if (userName != null && SecurityContextHolder.getContext().getAuthentication() == null) {
@@ -64,7 +62,5 @@ public class JwtFilter extends OncePerRequestFilter {
         }
         assert filterChain != null;
         filterChain.doFilter(request, response);
-
-
     }
 }
