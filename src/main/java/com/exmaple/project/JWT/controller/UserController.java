@@ -113,5 +113,13 @@ public class UserController {
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+    @PutMapping("user/update/{userId}")
+    public String updateUser(@PathVariable int userId, @RequestBody User updatedUser) {
+
+        System.out.println("it worked");
+        // Implement logic to update user details in the service
+        User savedUser = userService.updateUser(userId, updatedUser);
+        return "sucess";
+    }
 }
 

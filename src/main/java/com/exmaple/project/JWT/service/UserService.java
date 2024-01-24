@@ -41,6 +41,12 @@ public class UserService {
         }
         }
 
+    public User updateUser(int userId, User updatedUser) {
+        User user=userRepository.findById(userId).orElseThrow();
+        user.setEmail(updatedUser.getEmail());
+      return   userRepository.save(user);
+    }
+
 //    public void uploadProfilePicture(int userId, MultipartFile file) {
 //        // Retrieve the user from the database
 //        User user = userRepository.findById(userId).orElseThrow(() -> new EntityNotFoundException("User not found"));
