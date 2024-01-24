@@ -3,15 +3,21 @@ package com.exmaple.project.JWT.controller;
 import com.exmaple.project.JWT.configuration.JwtService;
 import com.exmaple.project.JWT.entity.JwtRequest;
 import com.exmaple.project.JWT.entity.JwtResponse;
+import com.exmaple.project.JWT.entity.User;
+import com.exmaple.project.JWT.repository.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin
 public class UserController {
     @Autowired
     JwtService jwtService;
+    @Autowired
+    UserRepository userRepository;
 
     @PostMapping("/authenticate")
     public JwtResponse createJwtTokens(@RequestBody JwtRequest jwtRequest)
@@ -35,6 +41,7 @@ public class UserController {
     public String adminHome() {
         return "user";
     }
+
 
 
 }
