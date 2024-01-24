@@ -16,21 +16,15 @@ public class RegisterController {
     UserService userService;
 
     @PostMapping("/register")
-    public ResponseEntity<String> register(@RequestBody User user) {
+    public ResponseEntity<HttpStatus> register(@RequestBody User user) {
         boolean isRegistered = userService.registerUser(user);
 
         if (isRegistered) {
-            return ResponseEntity.status(HttpStatus.OK).body("User registered successfully");
+            return new ResponseEntity<>(HttpStatus.OK);
         } else {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to register user");
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
     }
-
-//    @PostMapping("/upload")
-//    public ResponseEntity<String> handleFileUpload(@RequestParam("file") MultipartFile file) {
-//
-//        return ResponseEntity.ok("File uploaded successfully");
-//    }
 
 
 }

@@ -7,6 +7,7 @@ import com.exmaple.project.JWT.entity.User;
 import com.exmaple.project.JWT.repository.UserRepository;
 import com.exmaple.project.JWT.service.UserService;
 import com.exmaple.project.JWT.util.JwtUtil;
+import io.jsonwebtoken.Jwt;
 import jakarta.servlet.http.HttpServletRequest;
 import net.coobird.thumbnailator.Thumbnails;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,6 @@ import java.util.List;
 public class UserController {
     @Autowired
     JwtService jwtService;
-
     @Autowired
     UserService userService;
     @Autowired
@@ -38,9 +38,13 @@ public class UserController {
     JwtUtil jwtUtil;
 
     @PostMapping("/authenticate")
-    public JwtResponse createJwtTokens(@RequestBody JwtRequest jwtRequest)
+    public ResponseEntity<JwtResponse> createJwtTokens(@RequestBody JwtRequest jwtRequest)
             throws Exception {
-        return jwtService.createJwtToken(jwtRequest);
+        JwtResponse jwtResponse=jwtService.createJwtToken(jwtRequest);
+        if (jwtResponse==null){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(jwtResponse,HttpStatus.OK);
     }
 
     @GetMapping("/home")

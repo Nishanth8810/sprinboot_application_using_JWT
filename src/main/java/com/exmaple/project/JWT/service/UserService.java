@@ -27,6 +27,9 @@ public class UserService {
 
     public boolean registerUser(User user) {
         try {
+            if (userRepository.existsByEmail(user.getEmail())){
+                return false;
+            }
             User user1= new User();
             Role role = roleRepository.findById("User").orElseThrow();
             Set<Role> userRoles = new HashSet<>();
