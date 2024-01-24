@@ -32,7 +32,11 @@ public class JwtService implements UserDetailsService {
     public JwtResponse createJwtToken(JwtRequest jwtRequest) throws Exception {
         String userName = jwtRequest.getUserName();
         String userPassword = jwtRequest.getUserPassword();
-        authenticate(userName, userPassword);
+      int success=  authenticate(userName, userPassword);
+      if (success==0){
+          return null;
+      }
+
         final UserDetails userDetails = loadUserByUsername(userName);
         String newGeneratedToken = jwtUtil.generateToken(userDetails);
         User user = userRepository.findByEmail(userName);
@@ -57,14 +61,14 @@ public class JwtService implements UserDetailsService {
         return authorities;
     }
 
-    public void authenticate(String userName, String userPassword) throws Exception {
+    public int authenticate(String userName, String userPassword) throws Exception {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userName, userPassword));
-
+        return 1;
         } catch (DisabledException e) {
             throw new Exception("user is disabled");
         } catch (BadCredentialsException e) {
-            System.out.println("bad credential");;
+            return 0;
         }
     }
 }

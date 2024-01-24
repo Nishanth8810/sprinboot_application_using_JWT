@@ -3,6 +3,7 @@ package com.exmaple.project.JWT.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.http.HttpStatusCode;
 
 import java.util.Set;
 
@@ -18,6 +19,10 @@ public class User {
     int id;
     String email;
     String password;
+
+//    @Lob
+//    @Column(length = 500)
+//    private byte[] profilePicture;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinTable(name = "USER_ROLE",

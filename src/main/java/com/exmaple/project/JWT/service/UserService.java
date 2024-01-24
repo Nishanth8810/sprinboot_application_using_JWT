@@ -4,10 +4,13 @@ import com.exmaple.project.JWT.entity.Role;
 import com.exmaple.project.JWT.entity.User;
 import com.exmaple.project.JWT.repository.RoleRepository;
 import com.exmaple.project.JWT.repository.UserRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -38,5 +41,27 @@ public class UserService {
         }
         }
 
-    }
+//    public void uploadProfilePicture(int userId, MultipartFile file) {
+//        // Retrieve the user from the database
+//        User user = userRepository.findById(userId).orElseThrow(() -> new EntityNotFoundException("User not found"));
+//
+//        // Convert and set the image data
+//        try {
+//            user.setProfilePicture(file.getBytes());
+//        } catch (IOException e) {
+//            // Handle exception
+//        }
+//
+//        // Save the updated user entity
+//        userRepository.save(user);
+//    }
+//
+//    public byte[] getProfilePicture(int userId) {
+//        return userRepository.findById(userId).get().getProfilePicture();
+//    }
+
+
+//    public byte[] getProfilePicture(int userId) {
+//    }
+}
 
