@@ -7,22 +7,16 @@ import com.exmaple.project.JWT.entity.User;
 import com.exmaple.project.JWT.repository.UserRepository;
 import com.exmaple.project.JWT.service.UserService;
 import com.exmaple.project.JWT.util.JwtUtil;
-import io.jsonwebtoken.Jwt;
 import jakarta.servlet.http.HttpServletRequest;
 import net.coobird.thumbnailator.Thumbnails;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.security.Principal;
-import java.util.List;
 
 @RestController
 @CrossOrigin
