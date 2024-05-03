@@ -9,26 +9,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootApplication
-public class JwtApplication implements CommandLineRunner {
-    @Autowired
-    UserRepository userRepository;
-    @Autowired
-    JwtService jwtService;
-    @Autowired
-    BCryptPasswordEncoder bCryptPasswordEncoder;
+public class JwtApplication  {
 
     public static void main(String[] args) {
         SpringApplication.run(JwtApplication.class, args);
     }
 
-
-    @Override
-    public void run(String... args) throws Exception {
-//    User user=new User();
-//    user.setEmail("bbb");
-//    user.setPassword(bCryptPasswordEncoder.encode("bbb"));
-//    userRepository.save(user);
-
-
-    }
 }

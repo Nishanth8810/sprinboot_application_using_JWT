@@ -32,7 +32,8 @@ public class UserController {
     JwtUtil jwtUtil;
 
     @PostMapping("/authenticate")
-    public ResponseEntity<JwtResponse> createJwtTokens(@RequestBody JwtRequest jwtRequest)
+    public ResponseEntity<JwtResponse> createJwtTokens
+            (@RequestBody JwtRequest jwtRequest)
             throws Exception {
         JwtResponse jwtResponse=jwtService.createJwtToken(jwtRequest);
         if (jwtResponse==null){
@@ -59,25 +60,6 @@ public class UserController {
     }
 
 
-//    @PostMapping("/user/{userId}/upload-profile-picture")
-//    public ResponseEntity<String> uploadProfilePicture(@PathVariable int userId,
-//                                                       @RequestParam("file")
-//                                                       MultipartFile file) throws IOException {
-//
-//
-//        userService.uploadProfilePicture(userId, file);
-//        return ResponseEntity.ok("Profile picture uploaded successfully");
-//    }
-//
-//    @GetMapping("/user/{userId}/profile-picture")
-//    public ResponseEntity<byte[]> getProfilePicture(@PathVariable int userId) {
-//        byte[] imageData = userService.getProfilePicture(userId);
-//
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setContentType(MediaType.IMAGE_JPEG);
-//
-//        return new ResponseEntity<>(imageData, headers, HttpStatus.OK);
-//    }
 
     public static File resizeImage(MultipartFile inputFile) throws IOException, IOException {
         File resizedFile = File.createTempFile("resized-", "." + getFileExtension(inputFile));
@@ -115,9 +97,8 @@ public class UserController {
     public String updateUser(@PathVariable int userId, @RequestBody User updatedUser) {
 
         System.out.println("it worked");
-        // Implement logic to update user details in the service
         User savedUser = userService.updateUser(userId, updatedUser);
-        return "sucess";
+        return "success";
     }
 }
 

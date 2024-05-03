@@ -39,7 +39,7 @@ public class UserService {
         } catch (Exception e) {
             return false;
         }
-        }
+    }
 
     public User updateUser(int userId, User updatedUser) {
         User user=userRepository.findById(userId).orElseThrow();

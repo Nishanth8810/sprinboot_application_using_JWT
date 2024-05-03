@@ -22,15 +22,20 @@ public class SecurityConfiguration {
     JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     @Autowired
     JwtFilter jwtFilter;
+    @Autowired
+    JwtService jwtService;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(x -> x.requestMatchers("/", "/authenticate",
+                .authorizeHttpRequests(x -> x.requestMatchers
+                                ("/", "/authenticate",
                                 "/register/**","/admin/**",
                                 "/user/**","/getUser/**").permitAll()
-                        .requestMatchers("/forAdmin").hasAuthority("ROLE_Admin")
-                        .requestMatchers("/forUser").hasRole("User")
+                        .requestMatchers("/forAdmin")
+                        .hasAuthority("ROLE_Admin")
+                        .requestMatchers("/forUser")
+                        .hasRole("User")
                 )
                 .sessionManagement(sessionManagement ->
                         sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -40,7 +45,7 @@ public class SecurityConfiguration {
     }
 
     @Bean
-    public DaoAuthenticationProvider authenticationProvider(UserDetailsService jwtService) {
+    public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider auth = new DaoAuthenticationProvider();
         auth.setUserDetailsService(jwtService);
         auth.setPasswordEncoder(bCryptPasswordEncoder());
@@ -53,7 +58,8 @@ public class SecurityConfiguration {
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration config)
+    public AuthenticationManager authenticationManager
+            (AuthenticationConfiguration config)
             throws Exception {
         return config.getAuthenticationManager();
     }
