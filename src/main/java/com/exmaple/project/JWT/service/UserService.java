@@ -21,7 +21,7 @@ public class UserService {
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
-
+//////////////////////////////////////////
     public boolean registerUser(User user) {
         try {
             if (userRepository.existsByEmail(user.getEmail())){
